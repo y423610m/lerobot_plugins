@@ -6,6 +6,8 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "lerobot>=0.4.1",
+    "lerobot-robot-template",
+    "lerobot-teleoperator-template",
 ]
 
 [tool.uv.workspace]
@@ -13,3 +15,7 @@ members = [
     "robots/template",
     "teleoperators/template",
 ]
+
+[tool.uv.sources]
+lerobot-robot-template = { workspace = true }
+lerobot-teleoperator-template = { workspace = true }

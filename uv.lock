@@ -846,20 +846,26 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "lerobot" },
+    { name = "lerobot-robot-template" },
+    { name = "lerobot-teleoperator-template" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "lerobot", specifier = ">=0.4.1" }]
+requires-dist = [
+    { name = "lerobot", specifier = ">=0.4.1" },
+    { name = "lerobot-robot-template", editable = "robots/template" },
+    { name = "lerobot-teleoperator-template", editable = "teleoperators/template" },
+]
 
 [[package]]
 name = "lerobot-robot-template"
 version = "0.1.0"
-source = { virtual = "robots/template" }
+source = { editable = "robots/template" }
 
 [[package]]
 name = "lerobot-teleoperator-template"
 version = "0.1.0"
-source = { virtual = "teleoperators/template" }
+source = { editable = "teleoperators/template" }
 
 [[package]]
 name = "markupsafe"
