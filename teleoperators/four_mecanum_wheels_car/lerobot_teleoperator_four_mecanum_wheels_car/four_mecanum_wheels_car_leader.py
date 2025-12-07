@@ -9,20 +9,15 @@ from lerobot.teleoperators.teleoperator import Teleoperator
 
 from .config_four_mecanum_wheels_car_leader import FourMecanumWheelsCarLeaderConfig
 
-class FourMecanumWheelsCarLeader(Teleoperator):
+from lerobot.teleoperators.keyboard.teleop_keyboard import KeyboardTeleop
 
+class FourMecanumWheelsCarLeader(KeyboardTeleop):
     config_class = FourMecanumWheelsCarLeaderConfig
     name = "four_mecanum_wheels_car_leader"
 
     def __init__(self, config: FourMecanumWheelsCarLeaderConfig):
         super().__init__(config)
         self.config = config
-
-        self._is_connected = False
-        self._is_calibrated = True
-
-        self.count = 0
-        self.position = 0.0
 
     @cached_property
     def _state_ft(self) -> dict[str, type]:
@@ -43,38 +38,29 @@ class FourMecanumWheelsCarLeader(Teleoperator):
     def feedback_features(self) -> dict[str, type]:
         return {}
 
-    @property
-    def is_connected(self) -> bool:
-        return self._is_connected
-
-    @property
-    def is_calibrated(self) -> bool:
-        return self._is_calibrated
-
-    def connect(self, calibrate: bool = True) -> None:
-        self._is_connected = True
-
-    def calibrate(self) -> None:
-        return
-
-    def configure(self) -> None:
-        return
-
-    def disconnect(self) -> None:
-        self._is_connected = False
-
-    def _get_action(self) -> None:
-        self.count += 1
-        self.position = math.sin(self.count / 60.0 / 10.0 * 180 / 3.1415)
-
     def get_action(self) -> dict[str, Any]:
-        self._get_action()
-        return {
-            "x.vel": float(self.position),
+        keys = super().get_action()  # return {key, None} if pressed.
+        print(f"{keys=}")
+        action = {
+            "x.vel": float(0.0),
             "y.vel": float(0.0),
             "theta.vel": float(0.0),
         }
 
-    def send_feedback(self, feedback: dict[str, float]) -> None:
-        return
+        if "w" in keys:
+            action["x.vel"] += 1.0
+        if "s" in keys:
+            action["x.vel"] -= 1.0
+        if "d" in keys:
+            action["y.vel"] += 1.0
+        if "a" in keys:
+            action["y.vel"] -= 1.0
+        
+        return action
 
+    # def _on_press(self, key):
+        # if hasattr(key, "char"):
+            # print(f"{key.name=} {key.value=}")
+            # self.event_queue.put((key.char, True))
+        # else:
+            # print(f"{key.name=} {key.value=}")

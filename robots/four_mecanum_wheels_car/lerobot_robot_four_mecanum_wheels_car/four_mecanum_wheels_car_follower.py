@@ -40,6 +40,10 @@ class Wheel:
         self.servo_backward.on()
         print("b")
 
+    def stop(self):
+        self.servo_forward.off()
+        self.servo_backward.off()
+
 class FourMecanumWheelsCarFollower(Robot):
 
     config_class = FourMecanumWheelsCarFollowerConfig
@@ -130,12 +134,16 @@ class FourMecanumWheelsCarFollower(Robot):
             raise DeviceNotConnectedError(f"{self} is not connected.")
 
         # TODO handle wheel control
-        if action['x.vel'] > 0:
+        print(f"sent {action=}")
+        if action['x.vel'] > 0.0:
             for wheel_key, wheel in self.wheels.items():
                 wheel.move_forward()
-        if action['x.vel'] < 0:
+        elif action['x.vel'] < 0.0:
             for wheel_key, wheel in self.wheels.items():
                 wheel.move_backward()
+        else:
+            for wheel_key, wheel in self.wheels.items():
+                wheel.stop()
         return action
 
     def get_observation(self) -> dict[str, Any]:
