@@ -28,6 +28,19 @@ class Wheel:
         self.servo_forward =  DigitalOutputDevice(self.pin_forward)
         self.servo_backward =  DigitalOutputDevice(self.pin_backward)
 
+    def set_speed(self, speed):
+        speed = max(-1.0, min(1.0, speed))
+        self.servo_pwm.value = abs(speed)
+        if speed > 0.0:
+            self.servo_forward.on()
+            self.servo_backward.off()
+        elif speed < 0.0:
+            self.servo_forward.off()
+            self.servo_backward.on()
+        else:
+            self.servo_forward.off()
+            self.servo_backward.off()
+
     def move_forward(self, speed=0.5):
         self.servo_pwm.value = speed
         self.servo_forward.on()
@@ -133,16 +146,49 @@ class FourMecanumWheelsCarFollower(Robot):
         if not self.is_connected:
             raise DeviceNotConnectedError(f"{self} is not connected.")
 
-        # TODO handle wheel control
-        if action['x.vel'] > 0.0:
-            for wheel_key, wheel in self.wheels.items():
-                wheel.move_forward()
-        elif action['x.vel'] < 0.0:
-            for wheel_key, wheel in self.wheels.items():
-                wheel.move_backward()
-        else:
-            for wheel_key, wheel in self.wheels.items():
-                wheel.stop()
+        wheeel_speeeds = {
+            "rf": 0.0,
+            "lf": 0.0,
+            "rb": 0.0,
+            "lb": 0.0,
+        }
+        if action["x.vel"] > 0.0:
+            wheeel_speeeds["rf"] += 1.0
+            wheeel_speeeds["lf"] += 1.0
+            wheeel_speeeds["rb"] += 1.0
+            wheeel_speeeds["lb"] += 1.0
+        elif action["x.vel"] < 0.0:
+            wheeel_speeeds["rf"] -= 1.0
+            wheeel_speeeds["lf"] -= 1.0
+            wheeel_speeeds["rb"] -= 1.0
+            wheeel_speeeds["lb"] -= 1.0
+
+        if action["y.vel"] > 0.0:
+            wheeel_speeeds["rf"] += 0.5
+            wheeel_speeeds["lf"] += 0.5
+            wheeel_speeeds["rb"] -= 0.5
+            wheeel_speeeds["lb"] -= 0.5
+        elif action["y.vel"] < 0.0:
+            wheeel_speeeds["rf"] -= 0.5
+            wheeel_speeeds["lf"] -= 0.5
+            wheeel_speeeds["rb"] += 0.5
+            wheeel_speeeds["lb"] += 0.5
+
+        if action["theta.vel"] > 0.0:
+            wheeel_speeeds["rf"] += 0.3
+            wheeel_speeeds["lf"] -= 0.3
+            wheeel_speeeds["rb"] += 0.3
+            wheeel_speeeds["lb"] -= 0.3
+        elif action["theta.vel"] < 0.0:
+            wheeel_speeeds["rf"] -= 0.3
+            wheeel_speeeds["lf"] += 0.3
+            wheeel_speeeds["rb"] -= 0.3
+            wheeel_speeeds["lb"] += 0.3
+
+        print(f"{wheeel_speeeds=}")
+        for wheel_key, speed in wheeel_speeeds.items():
+            if wheel_key in self.wheels:
+                self.wheels[wheel_key].set_speed(speed)
         return action
 
     def get_observation(self) -> dict[str, Any]:
