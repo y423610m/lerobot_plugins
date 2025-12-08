@@ -134,7 +134,6 @@ class FourMecanumWheelsCarFollower(Robot):
             raise DeviceNotConnectedError(f"{self} is not connected.")
 
         # TODO handle wheel control
-        print(f"sent {action=}")
         if action['x.vel'] > 0.0:
             for wheel_key, wheel in self.wheels.items():
                 wheel.move_forward()

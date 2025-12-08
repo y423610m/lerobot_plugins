@@ -40,7 +40,6 @@ class FourMecanumWheelsCarLeader(KeyboardTeleop):
 
     def get_action(self) -> dict[str, Any]:
         keys = super().get_action()  # return {key, None} if pressed.
-        print(f"{keys=}")
         action = {
             "x.vel": float(0.0),
             "y.vel": float(0.0),
