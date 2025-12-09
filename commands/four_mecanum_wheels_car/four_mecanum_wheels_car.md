@@ -7,7 +7,6 @@ uv pip install robots/four_mecanum_wheels_car/ teleoperators/four_mecanum_wheels
 # teleoperate
 ```
 uv run lerobot-teleoperate \
-    --robot.type=four_mecanum_wheels_car_follower \
-    --teleop.type=four_mecanum_wheels_car_leader \
+    --config commands/four_mecanum_wheels_car/four_mecanum_wheels_car.yaml \
     --fps=30
 ```

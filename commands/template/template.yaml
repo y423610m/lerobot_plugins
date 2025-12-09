@@ -1,0 +1,6 @@
+teleop: 
+  type: template_leader
+robot: 
+  type: template_follower
+
+

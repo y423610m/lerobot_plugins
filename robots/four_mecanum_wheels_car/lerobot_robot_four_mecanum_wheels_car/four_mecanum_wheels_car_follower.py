@@ -14,7 +14,7 @@ from lerobot.robots.robot import Robot
 from .config_four_mecanum_wheels_car_follower import FourMecanumWheelsCarFollowerConfig
 
 
-from gpiozero import Servo, LED, DigitalOutputDevice
+from gpiozero import Servo, DigitalOutputDevice
 
 class Wheel:
     def __init__(self, pin_pwm, pin_forward, pin_backward):
@@ -24,6 +24,7 @@ class Wheel:
         print(f"{self.pin_pwm=} {self.pin_forward=} {self.pin_backward=}")
 
     def connect(self):
+        # gpiozero implicitly depends in lgpio for factory. Make sure lgpio is installed.
         self.servo_pwm =  Servo(self.pin_pwm, frame_width=20/1000, min_pulse_width=0.1*20/1000, max_pulse_width=0.99*20/1000)    
         self.servo_forward =  DigitalOutputDevice(self.pin_forward)
         self.servo_backward =  DigitalOutputDevice(self.pin_backward)
@@ -66,18 +67,22 @@ class FourMecanumWheelsCarFollower(Robot):
         super().__init__(config)
         self.config = config
 
+        print(f"{config=}")
+
         self.cameras = make_cameras_from_configs(config.cameras)
 
         self.wheels = {}
-        for wheel_key, motor_settings in self.config.channles_settings.items():
-            self.wheels[wheel_key] = Wheel(motor_settings['pwm'], motor_settings['forward'], motor_settings['backward'])
+        if self.config.rf:
+            self.wheels["rf"] = Wheel(self.config.rf.pwm, self.config.rf.forward, self.config.rf.backward)
+        if self.config.rb:
+            self.wheels["rb"] = Wheel(self.config.rb.pwm, self.config.rb.forward, self.config.rb.backward)
+        if self.config.lf:
+            self.wheels["lf"] = Wheel(self.config.lf.pwm, self.config.lf.forward, self.config.lf.backward)
+        if self.config.rb:
+            self.wheels["lb"] = Wheel(self.config.lb.pwm, self.config.lb.forward, self.config.lb.backward)
 
         self._is_connected = False
         self._is_calibrated = True
-
-
-        self._position = 0.0
-
 
     def connect(self, calibrate: bool = True) -> None:
         if self.is_connected:
