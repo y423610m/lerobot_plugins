@@ -1,0 +1,15 @@
+robot:
+  type: group_follower
+  robots:
+    four_mecanum_wheels_car_follower:
+      type: four_mecanum_wheels_car_follower
+      rf:
+        pwm: 18
+        forward: 27
+        backward: 22
+
+teleop:
+  type: group_leader
+  teleops:
+    four_mecanum_wheels_car_leader:
+      type: four_mecanum_wheels_car_leader

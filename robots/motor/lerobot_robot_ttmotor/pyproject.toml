@@ -1,0 +1,9 @@
+[project]
+name = "lerobot-robot-ttmotor"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "lgpio>=0.2.2.0",
+]

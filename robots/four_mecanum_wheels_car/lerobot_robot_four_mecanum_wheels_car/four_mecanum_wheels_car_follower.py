@@ -190,7 +190,6 @@ class FourMecanumWheelsCarFollower(Robot):
             wheeel_speeeds["rb"] -= 0.3
             wheeel_speeeds["lb"] += 0.3
 
-        print(f"{wheeel_speeeds=}")
         for wheel_key, speed in wheeel_speeeds.items():
             if wheel_key in self.wheels:
                 self.wheels[wheel_key].set_speed(speed)
