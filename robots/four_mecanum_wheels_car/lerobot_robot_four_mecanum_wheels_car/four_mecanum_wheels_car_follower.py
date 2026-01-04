@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from functools import cached_property
 from typing import Any, Optional, Tuple
 import threading
 import asyncio
@@ -124,9 +125,9 @@ class FourMecanumWheelsCarFollower(Robot):
     def is_calibrated(self) -> bool:
         return self.is_connected
 
-    @property
-    def _cameras_ft(self) -> dict[str, tuple]:
-        return self._cam_shape
+    @cached_property
+    def _cameras_ft(self) -> dict[str, tuple[int, int, int]]:
+        return {name: (cfg.height, cfg.width, 3) for name, cfg in self.config.cameras.items()}
 
     @cached_property
     def _state_ft(self) -> dict[str, type]:
@@ -206,7 +207,7 @@ class FourMecanumWheelsCarFollower(Robot):
         }
 
         for cam_key, cam in self.cameras.items():
-            h, w, c = self._cam_shape[cam_key]
+            h, w, c = self._cameras_ft[cam_key]
             frame = None
             try:
                 if hasattr(cam, "async_read"):
