@@ -1,0 +1,8 @@
+teleop: 
+  type: template_leader
+robot: 
+  type: zmq_client_follower
+  robot:
+    type: template_follower
+
+

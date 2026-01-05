@@ -1,0 +1,7 @@
+host: 
+  port_zmq_cmd: 5555
+  port_zmq_observations: 5556
+robot: 
+  type: template_follower
+
+
