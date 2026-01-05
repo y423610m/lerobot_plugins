@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Dict
+from typing import Dict, Optional
 from lerobot.cameras import CameraConfig
 from lerobot.robots.config import RobotConfig
 
@@ -30,7 +30,7 @@ class ZMQClientFollowerConfig(RobotConfig):
     # )
 
     cameras: dict[str, CameraConfig] = field(default_factory=dict)
-    # robot: RobotConfig = None
+    robots: dict[str, RobotConfig] = field(default_factory=dict)
 
     polling_timeout_ms: int = 15
     connect_timeout_s: int = 5

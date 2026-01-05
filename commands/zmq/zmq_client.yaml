@@ -2,7 +2,9 @@ teleop:
   type: template_leader
 robot: 
   type: zmq_client_follower
-  robot:
-    type: template_follower
+  remote_ip: localhost
+  robots:
+    zmq_client_follower:
+      type: template_follower
 
 

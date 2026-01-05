@@ -9,11 +9,12 @@ uv run scripts/zmq/zmq_host.py \
 ## client (desktop)
 ```
 uv run lerobot-teleoperate \
-    --config commands/zmq/zmq_host.yaml \
-    --robot.type=template_follower \
-    --teleop.type=zmq \
-    --robot.cameras="{ front: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" \
+    --config commands/zmq/zmq_client.yaml \
     --fps=60
+
+
+    <!-- --robot.cameras="{ front: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" \ -->
+
 ```
 
 
