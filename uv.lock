@@ -959,17 +959,17 @@ dependencies = [
 requires-dist = [
     { name = "ipython", specifier = ">=9.8.0" },
     { name = "lerobot", specifier = ">=0.4.1" },
-    { name = "lerobot-robot-four-mecanum-wheels-car", editable = "robots/four_mecanum_wheels_car" },
-    { name = "lerobot-robot-group", editable = "robots/group" },
-    { name = "lerobot-teleoperator-four-mecanum-wheels-car", editable = "teleoperators/four_mecanum_wheels_car" },
-    { name = "lerobot-teleoperator-group", editable = "teleoperators/group" },
+    { name = "lerobot-robot-four-mecanum-wheels-car", directory = "robots/four_mecanum_wheels_car" },
+    { name = "lerobot-robot-group", directory = "robots/group" },
+    { name = "lerobot-teleoperator-four-mecanum-wheels-car", directory = "teleoperators/four_mecanum_wheels_car" },
+    { name = "lerobot-teleoperator-group", directory = "teleoperators/group" },
     { name = "lgpio", specifier = ">=0.2.2.0" },
 ]
 
 [[package]]
 name = "lerobot-robot-four-mecanum-wheels-car"
 version = "0.1.0"
-source = { editable = "robots/four_mecanum_wheels_car" }
+source = { directory = "robots/four_mecanum_wheels_car" }
 dependencies = [
     { name = "gpiozero" },
     { name = "lgpio" },
@@ -984,7 +984,7 @@ requires-dist = [
 [[package]]
 name = "lerobot-robot-group"
 version = "0.1.0"
-source = { editable = "robots/group" }
+source = { directory = "robots/group" }
 
 [[package]]
 name = "lerobot-robot-template"
@@ -994,12 +994,12 @@ source = { virtual = "robots/template" }
 [[package]]
 name = "lerobot-teleoperator-four-mecanum-wheels-car"
 version = "0.1.0"
-source = { editable = "teleoperators/four_mecanum_wheels_car" }
+source = { directory = "teleoperators/four_mecanum_wheels_car" }
 
 [[package]]
 name = "lerobot-teleoperator-group"
 version = "0.1.0"
-source = { editable = "teleoperators/group" }
+source = { directory = "teleoperators/group" }
 
 [[package]]
 name = "lerobot-teleoperator-template"

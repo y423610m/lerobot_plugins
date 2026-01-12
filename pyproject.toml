@@ -25,7 +25,7 @@ members = [
 ]
 
 [tool.uv.sources]
-lerobot-robot-group = { workspace = true }
-lerobot-teleoperator-group = { workspace = true }
-lerobot-teleoperator-four-mecanum-wheels-car = { workspace = true }
-lerobot-robot-four-mecanum-wheels-car = { workspace = true }
+lerobot-teleoperator-group = { workspace = true, editable = false }
+lerobot-robot-four-mecanum-wheels-car = { workspace = true, editable = false }
+lerobot-teleoperator-four-mecanum-wheels-car = { workspace = true, editable = false }
+lerobot-robot-group = { workspace = true, editable = false }
