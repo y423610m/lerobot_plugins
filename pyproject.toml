@@ -9,8 +9,10 @@ dependencies = [
     "lerobot>=0.4.1",
     "lerobot-robot-four-mecanum-wheels-car",
     "lerobot-robot-group",
+    "lerobot-robot-template",
     "lerobot-teleoperator-four-mecanum-wheels-car",
     "lerobot-teleoperator-group",
+    "lerobot-teleoperator-template",
     "lgpio>=0.2.2.0",
 ]
 
@@ -29,3 +31,5 @@ lerobot-teleoperator-group = { workspace = true, editable = false }
 lerobot-robot-four-mecanum-wheels-car = { workspace = true, editable = false }
 lerobot-teleoperator-four-mecanum-wheels-car = { workspace = true, editable = false }
 lerobot-robot-group = { workspace = true, editable = false }
+lerobot-robot-template = { workspace = true, editable = false }
+lerobot-teleoperator-template = { workspace = true, editable = false }
