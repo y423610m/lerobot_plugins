@@ -10,6 +10,7 @@ import numpy as np
 from lerobot.cameras import make_cameras_from_configs
 from lerobot.utils.errors import DeviceNotConnectedError, DeviceAlreadyConnectedError
 from lerobot.robots import Robot, make_robot_from_config
+from lerobot.utils.constants import ACTION, OBS_STATE
 
 import base64
 import json
@@ -110,6 +111,14 @@ class ZMQClientFollower(Robot):
         if not self.is_connected:
             raise DeviceNotConnectedError(f"{self} is not connected.")
 
+    @cached_property
+    def _state_order(self) -> tuple[str, ...]:
+        return tuple(self.observation_features.keys())
+
+    @cached_property
+    def _cameras_ft(self) -> dict[str, tuple[int, int, int]]:
+        return {name: (cfg.height, cfg.width, 3) for name, cfg in self.config.cameras.items()}
+
     @property
     def is_connected(self) -> bool:
         return self._is_connected
@@ -208,7 +217,8 @@ class ZMQClientFollower(Robot):
     def _parse_observation_json(self, obs_string: str) -> dict[str, Any] | None:
         """Parses the JSON observation string."""
         try:
-            return json.loads(obs_string)
+            reveived_observation = json.loads(obs_string)
+            return reveived_observation
         except json.JSONDecodeError as e:
             logging.error(f"Error decoding JSON observation: {e}")
             return None

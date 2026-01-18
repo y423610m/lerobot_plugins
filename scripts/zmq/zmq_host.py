@@ -122,7 +122,7 @@ def main(cfg: ZMQServerConfig):
 
             time.sleep(max(1 / host.max_loop_freq_hz - elapsed, 0))
             duration = time.perf_counter() - start
-        print("Cycle time reached.")
+        print(f"Cycle time {host.connection_time_s=} reached.")
 
     except KeyboardInterrupt:
         print("Keyboard interrupt received. Exiting...")
