@@ -78,8 +78,9 @@ class FourMecanumWheelsCarFollower(Robot):
             self.wheels["rb"] = Wheel(self.config.rb.pwm, self.config.rb.forward, self.config.rb.backward)
         if self.config.lf:
             self.wheels["lf"] = Wheel(self.config.lf.pwm, self.config.lf.forward, self.config.lf.backward)
-        if self.config.rb:
+        if self.config.lb:
             self.wheels["lb"] = Wheel(self.config.lb.pwm, self.config.lb.forward, self.config.lb.backward)
+        print(f"construcsted {self.wheels=}")
 
         self._is_connected = False
         self._is_calibrated = True
