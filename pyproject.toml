@@ -7,6 +7,10 @@ requires-python = ">=3.11"
 dependencies = [
     "ipython>=9.8.0",
     "lerobot>=0.4.1",
+    "lerobot-robot-four-mecanum-wheels-car",
+    "lerobot-robot-group",
+    "lerobot-teleoperator-four-mecanum-wheels-car",
+    "lerobot-teleoperator-group",
     "lgpio>=0.2.2.0",
 ]
 
@@ -16,4 +20,12 @@ members = [
     "teleoperators/template",
     "robots/four_mecanum_wheels_car",
     "teleoperators/four_mecanum_wheels_car",
+    "robots/group",
+    "teleoperators/group",
 ]
+
+[tool.uv.sources]
+lerobot-teleoperator-group = { workspace = true, editable = false }
+lerobot-robot-four-mecanum-wheels-car = { workspace = true, editable = false }
+lerobot-teleoperator-four-mecanum-wheels-car = { workspace = true, editable = false }
+lerobot-robot-group = { workspace = true, editable = false }
