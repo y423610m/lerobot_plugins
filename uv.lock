@@ -950,8 +950,10 @@ dependencies = [
     { name = "lerobot" },
     { name = "lerobot-robot-four-mecanum-wheels-car" },
     { name = "lerobot-robot-group" },
+    { name = "lerobot-robot-template" },
     { name = "lerobot-teleoperator-four-mecanum-wheels-car" },
     { name = "lerobot-teleoperator-group" },
+    { name = "lerobot-teleoperator-template" },
     { name = "lgpio" },
 ]
 
@@ -961,8 +963,10 @@ requires-dist = [
     { name = "lerobot", specifier = ">=0.4.1" },
     { name = "lerobot-robot-four-mecanum-wheels-car", directory = "robots/four_mecanum_wheels_car" },
     { name = "lerobot-robot-group", directory = "robots/group" },
+    { name = "lerobot-robot-template", directory = "robots/template" },
     { name = "lerobot-teleoperator-four-mecanum-wheels-car", directory = "teleoperators/four_mecanum_wheels_car" },
     { name = "lerobot-teleoperator-group", directory = "teleoperators/group" },
+    { name = "lerobot-teleoperator-template", directory = "teleoperators/template" },
     { name = "lgpio", specifier = ">=0.2.2.0" },
 ]
 
@@ -989,7 +993,7 @@ source = { directory = "robots/group" }
 [[package]]
 name = "lerobot-robot-template"
 version = "0.1.0"
-source = { virtual = "robots/template" }
+source = { directory = "robots/template" }
 
 [[package]]
 name = "lerobot-teleoperator-four-mecanum-wheels-car"
@@ -1004,7 +1008,7 @@ source = { directory = "teleoperators/group" }
 [[package]]
 name = "lerobot-teleoperator-template"
 version = "0.1.0"
-source = { virtual = "teleoperators/template" }
+source = { directory = "teleoperators/template" }
 
 [[package]]
 name = "lgpio"
