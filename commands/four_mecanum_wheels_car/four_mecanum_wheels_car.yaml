@@ -1,8 +1,21 @@
 robot: 
   type: four_mecanum_wheels_car_follower
-  rf:
+  lf:
     pwm: 18
+    forward: 24
+    backward: 23
+  lb:
+    pwm: 17
     forward: 27
     backward: 22
+  rf:
+    pwm: 16
+    forward: 21
+    backward: 20
+  rb:
+    pwm: 13
+    forward: 19
+    backward: 26
 teleop: 
   type: four_mecanum_wheels_car_leader
+
