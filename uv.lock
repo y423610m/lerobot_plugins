@@ -504,6 +504,15 @@ wheels = [
 ]
 
 [[package]]
+name = "feetech-servo-sdk"
+version = "1.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pyserial" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5f/8e/c53d6f9a8bf3a86a635b58eeb675723f1b040f1665a0681467756c8989aa/feetech-servo-sdk-1.0.0.tar.gz", hash = "sha256:d4d3832e4b1b22a8222133a414db9f868224c2fb639426a1b11d96ddfe84e69c", size = 8392, upload-time = "2022-11-08T03:44:45.269Z" }
+
+[[package]]
 name = "filelock"
 version = "3.20.0"
 source = { registry = "https://pypi.org/simple" }
@@ -941,13 +950,18 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/d6/6e/8554bf6961cb9b4c340d5680aed1f362cfadf83281ba35661ad56c06835e/lerobot-0.4.1-py3-none-any.whl", hash = "sha256:d2ce502e29bbf5bcbd092a9590e6e070c6ef510ea9693fb6f718e4e4a4fd7a71", size = 737945, upload-time = "2025-11-10T11:31:26.91Z" },
 ]
 
+[package.optional-dependencies]
+feetech = [
+    { name = "feetech-servo-sdk" },
+]
+
 [[package]]
 name = "lerobot-plugins"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "ipython" },
-    { name = "lerobot" },
+    { name = "lerobot", extra = ["feetech"] },
     { name = "lerobot-robot-four-mecanum-wheels-car" },
     { name = "lerobot-robot-group" },
     { name = "lerobot-robot-template" },
@@ -960,7 +974,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "ipython", specifier = ">=9.8.0" },
-    { name = "lerobot", specifier = ">=0.4.1" },
+    { name = "lerobot", extras = ["feetech"], specifier = ">=0.4.1" },
     { name = "lerobot-robot-four-mecanum-wheels-car", directory = "robots/four_mecanum_wheels_car" },
     { name = "lerobot-robot-group", directory = "robots/group" },
     { name = "lerobot-robot-template", directory = "robots/template" },

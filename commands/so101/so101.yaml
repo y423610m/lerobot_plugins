@@ -1,0 +1,9 @@
+robot:
+  type: so101_follower
+  id: follower
+  port: /dev/ttyACM1
+
+teleop:
+  type: so101_leader
+  id: leader
+  port: /dev/ttyACM0
